@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Department;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +20,8 @@ class KeywordFactory extends Factory
     {
         return [
             'keyword' => fake()->word(),
-            'department_id' => Department::factory()
+            'department_id' => Department::factory(),
+            'user_id' => User::factory(),
         ];
     }
 }

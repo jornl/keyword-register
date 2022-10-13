@@ -1,6 +1,12 @@
 <?php
 
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\KeywordController;
+use App\Http\Controllers\MiscController;
+use App\Http\Controllers\UserController;
+use App\Models\Keyword;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -15,18 +21,13 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+Route::get('/', [KeywordController::class, 'index'])->name("home");
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Home');
-})->middleware(['auth'])->name('dashboard');
+Route::resource('keywords', KeywordController::class)->middleware(['auth']);
+Route::resource('users', UserController::class)->middleware(['auth']);
+Route::resource('departments', DepartmentController::class)->middleware(['auth']);
+
+Route::get('/dashboard', [MiscController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use App\Models\Keyword;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class KeywordController extends Controller
 {
@@ -14,7 +17,9 @@ class KeywordController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Welcome', [
+            'keywords' => Keyword::with('department')->latest()->get()
+        ]);
     }
 
     /**
@@ -24,7 +29,9 @@ class KeywordController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Keywords/Create', [
+            'departments' => Department::all()
+        ]);
     }
 
     /**
@@ -35,7 +42,12 @@ class KeywordController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Auth::user()->keywords()->create($request->validate([
+            'keyword' => ['required', 'unique:keywords'],
+            'department_id' => ['required'],
+        ]));
+
+        return redirect(route('keywords.index'));
     }
 
     /**

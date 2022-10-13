@@ -1,14 +1,25 @@
 import React from "react";
 
-export default function SearchBar(props) {
+export default function SearchBar({
+  name = "search",
+  value,
+  className,
+  placeholder,
+  handleChange,
+}) {
   return (
     <div className="search w-full col-start-2 relative">
       <input
         type="text"
-        name="search"
+        name={name}
+        value={value}
         id="search"
-        className="block border-2 border-hkblue w-full focus:ring-0 focus:outline-hkorange focus:outline-offset-2 focus:border-hkblue rounded-full text-xl py-4 px-8"
-        placeholder="Hva leter du etter?"
+        className={
+          `block border-2 border-hkblue w-full focus:ring-0 focus:outline-hkorange focus:outline-offset-2 focus:border-hkblue rounded-full text-xl py-4 px-8 ` +
+          className
+        }
+        placeholder={placeholder}
+        onChange={(e) => handleChange(e)}
       />
       <button className="absolute top-0 right-0 p-3 m-2 bg-hkblue rounded-full hover:bg-hkgreen">
         <svg viewBox="0 0 512 512" className="h-6 w-6 text-white">

@@ -20,7 +20,11 @@ export default function Authenticated({ auth, header, children }) {
                   <ApplicationLogo className="block h-20 w-auto text-gray-500" />
                 </Link>
               </div>
-
+              <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <NavLink href="/" active={route().current("home")}>
+                  Hjem
+                </NavLink>
+              </div>
               <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                 <NavLink
                   href={route("dashboard")}

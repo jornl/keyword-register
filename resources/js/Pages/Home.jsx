@@ -2,17 +2,55 @@ import React from "react";
 import { Head } from "@inertiajs/inertia-react";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 
+import Pagination from "@/Components/Pagination";
+import TextInput from "@/Components/TextInput";
+import StatusCard from "@/Components/StatusCard";
+import UserTable from "@/Components/Tables/User";
+import DepartmentsTable from "@/Components/Tables/Departments";
+import KeywordsTable from "@/Components/Tables/Keywords";
+
 export default function Home(props) {
   return (
     <Authenticated auth={props.auth} errors={props.errors}>
-      <Head title="Hjem" />
+      <Head title="Dashboard" />
       <div className="py-12">
-        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <div className="p-6 bg-white border-b border-gray-200">
-              You're logged in!
+        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 flex gap-5">
+          <StatusCard
+            header={
+              <h2 className="font-bold text-xl">Siste registrerte brukere</h2>
+            }
+            buttonText="Registrer bruker"
+            containerClassName="max-w-lg"
+          >
+            <UserTable users={props.users} />
+          </StatusCard>
+
+          <StatusCard
+            header={
+              <h2 className="font-bold text-xl">
+                Siste registrerte avdelinger
+              </h2>
+            }
+            buttonText="Registrer avdeling"
+          >
+            <DepartmentsTable departments={props.departments} />
+          </StatusCard>
+        </div>
+
+        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 flex gap-5 mt-5">
+          <StatusCard
+            header={<h2 className="font-bold text-xl">Nøkkelord/Stikkord</h2>}
+            buttonText="Opprett nytt nøkkelord"
+            containerClassName="w-full"
+          >
+            <div className="">
+              <TextInput placeholder="Søk" className="mb-5" />
             </div>
-          </div>
+
+            <KeywordsTable keywords={props.keywords} />
+
+            <Pagination className="mt-5" links={props.keywords.links} />
+          </StatusCard>
         </div>
       </div>
     </Authenticated>
