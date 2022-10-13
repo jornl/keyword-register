@@ -20,6 +20,7 @@ export default function Home(props) {
               <h2 className="font-bold text-xl">Siste registrerte brukere</h2>
             }
             buttonText="Registrer bruker"
+            buttonUrl={route("users.create")}
             containerClassName="max-w-lg"
           >
             <UserTable users={props.users} />
@@ -32,6 +33,7 @@ export default function Home(props) {
               </h2>
             }
             buttonText="Registrer avdeling"
+            buttonUrl={route("departments.create")}
           >
             <DepartmentsTable departments={props.departments} />
           </StatusCard>
@@ -39,8 +41,13 @@ export default function Home(props) {
 
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 flex gap-5 mt-5">
           <StatusCard
-            header={<h2 className="font-bold text-xl">Nøkkelord/Stikkord</h2>}
+            header={
+              <h2 className="font-bold text-xl">
+                Nøkkelord/Stikkord ({props.keywords.total})
+              </h2>
+            }
             buttonText="Opprett nytt nøkkelord"
+            buttonUrl={route("keywords.create")}
             containerClassName="w-full"
           >
             <div className="">

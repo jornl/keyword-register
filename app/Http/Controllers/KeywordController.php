@@ -18,7 +18,7 @@ class KeywordController extends Controller
     public function index()
     {
         return Inertia::render('Welcome', [
-            'keywords' => Keyword::with('department')->latest()->get()
+            'keywords' => Keyword::with('department')->latest()->paginate(16)
         ]);
     }
 

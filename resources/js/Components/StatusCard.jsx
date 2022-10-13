@@ -1,7 +1,13 @@
 import { Link } from "@inertiajs/inertia-react";
 import React from "react";
 
-function StatusCard({ children, header, buttonText = "", containerClassName }) {
+function StatusCard({
+  children,
+  header,
+  buttonText = "Create",
+  buttonUrl,
+  containerClassName,
+}) {
   return (
     <div
       className={
@@ -11,10 +17,10 @@ function StatusCard({ children, header, buttonText = "", containerClassName }) {
     >
       <div className="flex justify-between mb-5 items-center">
         {header}
-        {buttonText && (
+        {buttonUrl && (
           <Link
-            href={route("users.create")}
-            className="inline-flex items-center px-4 py-2 bg-gray-900 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest active:bg-gray-900 transition ease-in-out duration-150 hover:bg-gray-700"
+            href={buttonUrl}
+            className="inline-flex items-center px-4 py-2 bg-hkblue border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest active:bg-hkblue transition ease-in-out duration-150 hover:bg-hkgreen"
           >
             {buttonText}
           </Link>

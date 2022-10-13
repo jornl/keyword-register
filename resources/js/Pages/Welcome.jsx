@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { Link, Head } from "@inertiajs/inertia-react";
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import TextInput from "@/Components/TextInput";
-import { Inertia } from "@inertiajs/inertia";
+import Pagination from "@/Components/Pagination";
 
 export default function Welcome(props) {
   const [query, setQuery] = useState("");
 
   const filteredKeywords =
     query === ""
-      ? props.keywords
-      : props.keywords.filter((keyword) => {
+      ? props.keywords.data
+      : props.keywords.data.filter((keyword) => {
           return keyword.keyword.toLowerCase().includes(query.toLowerCase());
         });
 
@@ -99,6 +99,7 @@ export default function Welcome(props) {
                       </div>
                     ))}
                   </div>
+                  <Pagination links={props.keywords.links} />
                 </div>
               </div>
             </div>

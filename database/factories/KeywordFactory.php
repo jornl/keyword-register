@@ -19,7 +19,7 @@ class KeywordFactory extends Factory
     public function definition()
     {
         return [
-            'keyword' => fake()->word(),
+            'keyword' => fake()->unique()->word(),
             'department_id' => Department::factory(),
             'user_id' => User::factory(),
         ];
