@@ -22,7 +22,6 @@ function Create(props) {
     event.preventDefault();
 
     data["department_id"] = selectedDepartment.id;
-    console.log(data);
 
     post(route("keywords.store"), data);
   };

@@ -22,6 +22,7 @@ return new class extends Migration
                 ->constrained();
 
             $table->string('keyword')->unique();
+            $table->text('additional_info')->nullable();
             $table->timestamps();
         });
     }

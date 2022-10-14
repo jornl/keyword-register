@@ -16,6 +16,7 @@ function Create(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    post(route("departments.store"), data);
   };
 
   return (

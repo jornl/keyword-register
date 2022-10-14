@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Head } from "@inertiajs/inertia-react";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 
@@ -10,6 +10,19 @@ import DepartmentsTable from "@/Components/Tables/Departments";
 import KeywordsTable from "@/Components/Tables/Keywords";
 
 export default function Home(props) {
+  const [query, setQuery] = useState("");
+
+  const filteredKeywords =
+    query === ""
+      ? props.keywords.data
+      : props.keywords.data.filter((keyword) => {
+          return keyword.keyword.toLowerCase().includes(query.toLowerCase());
+        });
+
+  const handleInput = (event) => {
+    setQuery(event.target.value);
+  };
+
   return (
     <Authenticated auth={props.auth} errors={props.errors}>
       <Head title="Dashboard" />
@@ -51,10 +64,14 @@ export default function Home(props) {
             containerClassName="w-full"
           >
             <div className="">
-              <TextInput placeholder="Søk" className="mb-5" />
+              <TextInput
+                placeholder="Søk"
+                className="mb-5"
+                handleChange={handleInput}
+              />
             </div>
 
-            <KeywordsTable keywords={props.keywords} />
+            <KeywordsTable keywords={filteredKeywords} />
 
             <Pagination className="mt-5" links={props.keywords.links} />
           </StatusCard>

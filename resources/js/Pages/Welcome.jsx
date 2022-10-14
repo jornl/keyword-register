@@ -22,7 +22,7 @@ export default function Welcome(props) {
 
   return (
     <>
-      <Head title="Welcome" />
+      <Head title="Forside" />
 
       <div className="min-h-screen bg-gray-100 sm:items-center sm:pt-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

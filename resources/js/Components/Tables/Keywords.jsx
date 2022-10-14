@@ -25,7 +25,7 @@ function Keywords({ keywords }) {
         </tr>
       </thead>
       <tbody>
-        {keywords.data.map((keyword) => (
+        {keywords.map((keyword) => (
           <tr key={keyword.id} className="bg-white border-b">
             <th scope="row" className="px-4 py-4 font-medium text-gray-900">
               {keyword.keyword}

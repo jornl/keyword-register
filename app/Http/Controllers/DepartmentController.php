@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Department;
+use Auth;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -36,7 +37,11 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Auth::user()->departments()->create($request->validate([
+            'name' => 'required|unique:departments',
+        ]));
+
+        return redirect(route('dashboard'));
     }
 
     /**

@@ -5,7 +5,6 @@ import React from "react";
 
 function Departments({ departments }) {
   const deleteDepartment = (departmentId) => {
-    console.log(departmentId);
     // Inertia.delete(route("departments.destroy", departmentId));
   };
 

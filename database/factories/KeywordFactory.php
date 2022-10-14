@@ -22,6 +22,7 @@ class KeywordFactory extends Factory
             'keyword' => fake()->unique()->word(),
             'department_id' => Department::factory(),
             'user_id' => User::factory(),
+            'additional_info' => fake()->sentence()
         ];
     }
 }
