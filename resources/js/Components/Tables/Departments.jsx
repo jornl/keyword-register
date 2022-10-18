@@ -1,11 +1,18 @@
+import React from "react";
+
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { Inertia } from "@inertiajs/inertia";
 import { Link } from "@inertiajs/inertia-react";
-import React from "react";
+
+import UpdateDepartment from "../Modals/UpdateDepartment";
 
 function Departments({ departments }) {
-  const deleteDepartment = (departmentId) => {
-    // Inertia.delete(route("departments.destroy", departmentId));
+  const deleteDepartment = (event, department) => {
+    event.preventDefault();
+
+    if (confirm(`Er du sikker på at du vil slette ${department.name}?`)) {
+      Inertia.delete(route("departments.destroy", department.id));
+    }
   };
 
   return (
@@ -37,17 +44,14 @@ function Departments({ departments }) {
             </td>
             <td className="px-4 py-4">{department.user.name}</td>
             <td className="flex justify-end items-center pr-4 py-4">
+              <UpdateDepartment department={department} />
+
               <Link
-                href={route("departments.edit", department.id)}
-                className="text-hkblue mr-4"
+                onClick={(event) => deleteDepartment(event, department)}
+                className="text-hkblue"
               >
-                <PencilSquareIcon className="w-4" />
+                <TrashIcon className="w-4" />
               </Link>
-              <form className="" onSubmit={deleteDepartment(department.id)}>
-                <Link as="button" type="button" className="text-hkblue">
-                  <TrashIcon className="w-4" />
-                </Link>
-              </form>
             </td>
           </tr>
         ))}

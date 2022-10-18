@@ -7,6 +7,7 @@ function StatusCard({
   buttonText = "Create",
   buttonUrl,
   containerClassName,
+  modal,
 }) {
   return (
     <div
@@ -17,6 +18,7 @@ function StatusCard({
     >
       <div className="flex justify-between mb-5 items-center">
         {header}
+        {modal}
         {buttonUrl && (
           <Link
             href={buttonUrl}

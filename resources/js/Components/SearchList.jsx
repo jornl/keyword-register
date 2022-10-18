@@ -9,7 +9,6 @@ function SearchList({ search, items, selectedItem }) {
     }
   });
 
-  console.log(filteredData);
   return (
     <>
       {search !== "" && (

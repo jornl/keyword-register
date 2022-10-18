@@ -75,7 +75,11 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, Department $department)
     {
-        //
+        $department->update($request->validate([
+            'name' => 'required|unique:departments'
+        ]));
+
+        redirect(route('dashboard'));
     }
 
     /**
@@ -86,6 +90,8 @@ class DepartmentController extends Controller
      */
     public function destroy(Department $department)
     {
-        //
+        $department->delete();
+
+        return redirect(route('dashboard'));
     }
 }
