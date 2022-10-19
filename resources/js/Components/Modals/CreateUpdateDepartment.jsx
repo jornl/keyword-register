@@ -18,7 +18,8 @@ export default function Department({ department = {}, update = false }) {
     setIsOpen(false);
   };
 
-  const openModal = () => {
+  const openModal = (event) => {
+    event.preventDefault();
     setIsOpen(true);
   };
 
@@ -46,18 +47,15 @@ export default function Department({ department = {}, update = false }) {
 
   return (
     <>
-      {update === false && (
+      {update === false ? (
         <PrimaryButton type="button" onClick={openModal}>
           Registrer avdeling
         </PrimaryButton>
-      )}
-
-      {update === true && (
+      ) : (
         <Link
-          onClick={(event) => {
-            event.preventDefault();
-            openModal();
-          }}
+          as="button"
+          type="button"
+          onClick={openModal}
           className="text-hkblue mr-4"
         >
           <PencilSquareIcon className="w-4" />
@@ -94,7 +92,7 @@ export default function Department({ department = {}, update = false }) {
                     as="h3"
                     className="text-lg font-medium leading-6 text-hkblue"
                   >
-                    {update === true ? "Endre" : "Endre"} avdeling
+                    {update === true ? "Endre" : "Opprett"} avdeling
                   </Dialog.Title>
                   <form
                     action="post"
@@ -120,7 +118,7 @@ export default function Department({ department = {}, update = false }) {
 
                     <div className="mt-4">
                       <PrimaryButton processing={processing}>
-                        {update === true ? "Endre" : "Endre"} avdeling
+                        {update === true ? "Endre" : "Opprett"} avdeling
                       </PrimaryButton>
                     </div>
                   </form>
