@@ -8,7 +8,7 @@ import StatusCard from "@/Components/StatusCard";
 import UserTable from "@/Components/Tables/User";
 import DepartmentsTable from "@/Components/Tables/Departments";
 import KeywordsTable from "@/Components/Tables/Keywords";
-import CreateDepartment from "@/Components/Modals/CreateDepartment";
+import CreateUpdateDepartment from "@/Components/Modals/CreateUpdateDepartment";
 
 export default function Home(props) {
   const [query, setQuery] = useState("");
@@ -46,7 +46,7 @@ export default function Home(props) {
                 Siste registrerte avdelinger
               </h2>
             }
-            modal={<CreateDepartment />}
+            modal={<CreateUpdateDepartment />}
           >
             <DepartmentsTable departments={props.departments} />
           </StatusCard>

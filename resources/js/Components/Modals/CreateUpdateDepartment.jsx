@@ -1,15 +1,17 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { useForm } from "@inertiajs/inertia-react";
+import { PencilSquareIcon } from "@heroicons/react/24/outline";
+import { Link, useForm } from "@inertiajs/inertia-react";
 import { Fragment, useState } from "react";
 import InputError from "../InputError";
 import InputLabel from "../InputLabel";
 import PrimaryButton from "../PrimaryButton";
 import TextInput from "../TextInput";
 
-export default function Department() {
+export default function Department({ department = {}, update = false }) {
   let [isOpen, setIsOpen] = useState(false);
-  const { data, setData, post, processing, errors, reset } = useForm({
-    name: "",
+  const { data, setData, post, put, processing, errors, reset } = useForm({
+    id: department.id ?? "",
+    name: department.name ?? "",
   });
 
   const closeModal = () => {
@@ -23,20 +25,44 @@ export default function Department() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    post(route("departments.store"), {
-      ...data,
-      onSuccess: () => {
-        reset("name");
-        closeModal();
-      },
-    });
+    if (update === true) {
+      put(route("departments.update", data.id), {
+        data,
+        onSuccess: () => {
+          reset("name");
+          closeModal();
+        },
+      });
+    } else {
+      post(route("departments.store"), {
+        data,
+        onSuccess: () => {
+          reset("name");
+          closeModal();
+        },
+      });
+    }
   };
 
   return (
     <>
-      <PrimaryButton type="button" onClick={openModal}>
-        Registrer avdeling
-      </PrimaryButton>
+      {update === false && (
+        <PrimaryButton type="button" onClick={openModal}>
+          Registrer avdeling
+        </PrimaryButton>
+      )}
+
+      {update === true && (
+        <Link
+          onClick={(event) => {
+            event.preventDefault();
+            openModal();
+          }}
+          className="text-hkblue mr-4"
+        >
+          <PencilSquareIcon className="w-4" />
+        </Link>
+      )}
 
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -68,7 +94,7 @@ export default function Department() {
                     as="h3"
                     className="text-lg font-medium leading-6 text-hkblue"
                   >
-                    Opprett avdeling
+                    {update === true ? "Endre" : "Endre"} avdeling
                   </Dialog.Title>
                   <form
                     action="post"
@@ -86,6 +112,7 @@ export default function Department() {
                           handleChange={(event) =>
                             setData("name", event.target.value)
                           }
+                          value={data.name || ""}
                         />
                         <InputError message={errors.name} className="mt-2" />
                       </div>
@@ -93,7 +120,7 @@ export default function Department() {
 
                     <div className="mt-4">
                       <PrimaryButton processing={processing}>
-                        Opprett avdeling
+                        {update === true ? "Endre" : "Endre"} avdeling
                       </PrimaryButton>
                     </div>
                   </form>

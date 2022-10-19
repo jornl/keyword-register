@@ -14,7 +14,7 @@ class MiscController extends Controller
     {
         return Inertia::render('Home', [
             'users' => User::latest()->take(5)->get(),
-            'departments' => Department::with('user')->latest()->take(5)->get(),
+            'departments' => Department::with('user')->latest('updated_at')->take(5)->get(),
             'keywords' => Keyword::with(['department', 'user'])->latest()->paginate(15),
         ]);
     }

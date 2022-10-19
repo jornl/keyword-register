@@ -1,10 +1,10 @@
 import React from "react";
 
-import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { TrashIcon } from "@heroicons/react/24/outline";
 import { Inertia } from "@inertiajs/inertia";
 import { Link } from "@inertiajs/inertia-react";
 
-import UpdateDepartment from "../Modals/UpdateDepartment";
+import CreateUpdateDepartment from "../Modals/CreateUpdateDepartment";
 
 function Departments({ departments }) {
   const deleteDepartment = (event, department) => {
@@ -26,6 +26,9 @@ function Departments({ departments }) {
             Registrert
           </th>
           <th scope="col" className="px-4 py-3">
+            Oppdatert
+          </th>
+          <th scope="col" className="px-4 py-3">
             Registrert av
           </th>
           <th className="sr-only" aria-hidden="true">
@@ -42,9 +45,12 @@ function Departments({ departments }) {
             <td className="px-4 py-4">
               {new Date(department.created_at).toLocaleDateString()}
             </td>
+            <td className="px-4 py-4">
+              {new Date(department.updated_at).toLocaleDateString()}
+            </td>
             <td className="px-4 py-4">{department.user.name}</td>
             <td className="flex justify-end items-center pr-4 py-4">
-              <UpdateDepartment department={department} />
+              <CreateUpdateDepartment update={true} department={department} />
 
               <Link
                 onClick={(event) => deleteDepartment(event, department)}
