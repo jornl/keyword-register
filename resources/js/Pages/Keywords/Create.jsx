@@ -71,7 +71,10 @@ function Create(props) {
                       <div className="relative overflow-hidden">
                         <Combobox.Input
                           onChange={(event) => setQuery(event.target.value)}
-                          displayValue={(department) => department.name}
+                          displayValue={(department) => {
+                            console.log(department);
+                            department.name;
+                          }}
                           className="border-gray-300 rounded-md shadow-sm w-full"
                           placeholder="Avdeling"
                           required={true}

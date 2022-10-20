@@ -1,17 +1,21 @@
-import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
-import { Link } from "@inertiajs/inertia-react";
 import React from "react";
+import { TrashIcon } from "@heroicons/react/24/outline";
+import { Link } from "@inertiajs/inertia-react";
+import CreateUpdateKeyword from "../Modals/CreateUpdateKeyword";
 
-function Keywords({ keywords }) {
+function Keywords({ keywords, departments }) {
   return (
     <table className="w-full text-sm text-left text-gray-500">
       <thead className="text-xs text-gray-700 uppercase bg-gray-50">
         <tr>
           <th scope="col" className="px-4 py-3">
-            Nøkkelord/Stikkord
+            Stikkord
           </th>
           <th scope="col" className="px-4 py-3">
             Avdeling
+          </th>
+          <th scope="col" className="px-4 py-3">
+            Informasjon
           </th>
           <th scope="col" className="px-4 py-3">
             Opprettet
@@ -31,17 +35,17 @@ function Keywords({ keywords }) {
               {keyword.keyword}
             </th>
             <td className="px-4 py-4">{keyword.department.name}</td>
+            <td className="px-4 py-4">{keyword.additional_info}</td>
             <td className="px-4 py-4">
               {new Date(keyword.created_at).toLocaleDateString()}
             </td>
             <td className="px-4 py-4">{keyword.user.name}</td>
             <td className="flex justify-end items-center pr-4 py-4">
-              <Link
-                href={`/user/${keyword.id}/edit`}
-                className="text-hkblue mr-4"
-              >
-                <PencilSquareIcon className="w-4" />
-              </Link>
+              <CreateUpdateKeyword
+                keyword={keyword}
+                departments={departments}
+                update={true}
+              />
               <Link href={`/user/${keyword.id}/delete`} className="text-hkblue">
                 <TrashIcon className="w-4" />
               </Link>

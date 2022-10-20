@@ -43,11 +43,12 @@ class KeywordController extends Controller
     public function store(Request $request)
     {
         Auth::user()->keywords()->create($request->validate([
-            'keyword' => ['required', 'unique:keywords'],
-            'department_id' => ['required'],
+            'keyword' => 'required|unique:keywords',
+            'department_id' => 'required',
+            'additional_info' => 'nullable|string'
         ]));
 
-        return redirect(route('keywords.index'));
+        return redirect(route('dashboard'));
     }
 
     /**
@@ -81,7 +82,13 @@ class KeywordController extends Controller
      */
     public function update(Request $request, Keyword $keyword)
     {
-        //
+        $keyword->update($request->validate([
+            'keyword' => 'required',
+            'department_id' => 'required',
+            'additional_info' => 'nullable|string'
+        ]));
+
+        return redirect(route('dashboard'));
     }
 
     /**

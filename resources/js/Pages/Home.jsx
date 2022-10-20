@@ -9,6 +9,7 @@ import UserTable from "@/Components/Tables/User";
 import DepartmentsTable from "@/Components/Tables/Departments";
 import KeywordsTable from "@/Components/Tables/Keywords";
 import CreateUpdateDepartment from "@/Components/Modals/CreateUpdateDepartment";
+import CreateUpdateKeyword from "@/Components/Modals/CreateUpdateKeyword";
 
 export default function Home(props) {
   const [query, setQuery] = useState("");
@@ -48,7 +49,7 @@ export default function Home(props) {
             }
             modal={<CreateUpdateDepartment />}
           >
-            <DepartmentsTable departments={props.departments} />
+            <DepartmentsTable departments={props.departments.latest} />
           </StatusCard>
         </div>
 
@@ -59,8 +60,7 @@ export default function Home(props) {
                 Nøkkelord/Stikkord ({props.keywords.total})
               </h2>
             }
-            buttonText="Opprett nytt nøkkelord"
-            buttonUrl={route("keywords.create")}
+            modal={<CreateUpdateKeyword departments={props.departments.all} />}
             containerClassName="w-full"
           >
             <div className="">
@@ -71,7 +71,10 @@ export default function Home(props) {
               />
             </div>
 
-            <KeywordsTable keywords={filteredKeywords} />
+            <KeywordsTable
+              keywords={filteredKeywords}
+              departments={props.departments.all}
+            />
 
             <Pagination className="mt-5" links={props.keywords.links} />
           </StatusCard>
