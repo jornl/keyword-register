@@ -1,9 +1,18 @@
 import React from "react";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { Link } from "@inertiajs/inertia-react";
+import { Inertia } from "@inertiajs/inertia";
 import CreateUpdateKeyword from "../Modals/CreateUpdateKeyword";
 
 function Keywords({ keywords, departments }) {
+  const deleteKeyword = (event, keyword) => {
+    event.preventDefault();
+
+    if (confirm(`Er du sikker på at du vil slette ${keyword.keyword}`)) {
+      Inertia.delete(route("keywords.destroy", keyword.id));
+    }
+  };
+
   return (
     <table className="w-full text-sm text-left text-gray-500">
       <thead className="text-xs text-gray-700 uppercase bg-gray-50">
@@ -46,7 +55,11 @@ function Keywords({ keywords, departments }) {
                 departments={departments}
                 update={true}
               />
-              <Link href={`/user/${keyword.id}/delete`} className="text-hkblue">
+              <Link
+                as="button"
+                className="text-hkblue"
+                onClick={(event) => deleteKeyword(event, keyword)}
+              >
                 <TrashIcon className="w-4" />
               </Link>
             </td>

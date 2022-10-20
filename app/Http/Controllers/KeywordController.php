@@ -99,6 +99,8 @@ class KeywordController extends Controller
      */
     public function destroy(Keyword $keyword)
     {
-        //
+        $keyword->delete();
+
+        return redirect(route('dashboard'));
     }
 }
