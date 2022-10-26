@@ -8,7 +8,7 @@ function Keywords({ keywords, departments }) {
   const deleteKeyword = (event, keyword) => {
     event.preventDefault();
 
-    if (confirm(`Er du sikker på at du vil slette ${keyword.keyword}`)) {
+    if (confirm(`Er du sikker på at du vil slette ${keyword.keyword}?`)) {
       Inertia.delete(route("keywords.destroy", keyword.id));
     }
   };
