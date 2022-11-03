@@ -32,30 +32,6 @@ export default function Home(props) {
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 flex gap-5">
           <StatusCard
             header={
-              <h2 className="font-bold text-xl">Siste registrerte brukere</h2>
-            }
-            buttonText="Registrer bruker"
-            buttonUrl={route("users.create")}
-            containerClassName="max-w-lg"
-          >
-            <UserTable users={props.users} />
-          </StatusCard>
-
-          <StatusCard
-            header={
-              <h2 className="font-bold text-xl">
-                Siste registrerte avdelinger
-              </h2>
-            }
-            modal={<CreateUpdateDepartment />}
-          >
-            <DepartmentsTable departments={props.departments.latest} />
-          </StatusCard>
-        </div>
-
-        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 flex gap-5 mt-5">
-          <StatusCard
-            header={
               <h2 className="font-bold text-xl">
                 Nøkkelord/Stikkord ({props.keywords.total})
               </h2>
@@ -77,6 +53,30 @@ export default function Home(props) {
             />
 
             <Pagination className="mt-5" links={props.keywords.links} />
+          </StatusCard>
+        </div>
+
+        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 flex gap-5 mt-5">
+          <StatusCard
+            header={
+              <h2 className="font-bold text-xl">Siste registrerte brukere</h2>
+            }
+            buttonText="Registrer bruker"
+            buttonUrl={route("users.create")}
+            containerClassName="max-w-lg"
+          >
+            <UserTable users={props.users} />
+          </StatusCard>
+
+          <StatusCard
+            header={
+              <h2 className="font-bold text-xl">
+                Siste registrerte avdelinger
+              </h2>
+            }
+            modal={<CreateUpdateDepartment />}
+          >
+            <DepartmentsTable departments={props.departments.latest} />
           </StatusCard>
         </div>
       </div>
