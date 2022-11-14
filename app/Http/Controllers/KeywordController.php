@@ -84,7 +84,7 @@ class KeywordController extends Controller
     {
         $keyword->update($request->validate([
             'keyword' => 'required',
-            'department_id' => 'required',
+            'department_id' => 'sometimes|required',
             'additional_info' => 'nullable|string'
         ]));
 
