@@ -37,7 +37,7 @@ class DepartmentController extends Controller
             'name' => 'required|unique:departments'
         ]));
 
-        redirect(route('dashboard'));
+        return redirect(route('dashboard'));
     }
 
     /**
