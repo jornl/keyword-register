@@ -1,9 +1,8 @@
-# Todo
-- [x] Kombinere opprett/endre avdelingsform.
-- [x] Endre og slette Stikkord.
-- [ ] Visning av nøkkelord/stikkord.
-- [ ] Opprette, endre og slette brukere.
-- [ ] Fjerne mulighet for å registrere seg.
+# Keyword Register
+[![Tests](https://github.com/jornl/keyword-register/actions/workflows/laravel.yml/badge.svg)](https://github.com/jornl/keyword-register/actions/workflows/laravel.yml)
 
-- [ ] Mobiltilpasset
-
+## TODO:
+- [ ] Add ability to invite or create users.
+- [ ] Responsive views.
+- [ ] Remove ability to register?
+- [ ] Change how keywords are displayed on welcome page.
