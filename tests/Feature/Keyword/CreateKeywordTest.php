@@ -23,13 +23,11 @@ class CreateKeywordTest extends TestCase
     }
 
     /** @test */
-    public function authenticated_users_gets_an_error_when_fields_are_missing()
+    public function authenticated_users_gets_an_error_when_required_fields_are_missing()
     {
         $this->signIn();
 
-        $this
-            ->get(route('dashboard'))
-            ->assertOk();
+        $this->get(route('dashboard'));
 
         $this
             ->followingRedirects()
@@ -49,25 +47,22 @@ class CreateKeywordTest extends TestCase
         $user = $this->signIn();
         $keyword = Keyword::factory()->make([
             'user_id' => $user->id
-        ])->toArray();
+        ]);
 
-        $this
-            ->get(route('dashboard'))
-            ->assertOk();
+        $this->get(route('dashboard'));
 
         $this
             ->followingRedirects()
-            ->post(route('keywords.store'), $keyword)
+            ->post(route('keywords.store'), $keyword->toArray())
             ->assertOk()
             ->assertInertia(
-                function (Assert $page) use ($keyword) {
-                    $page
-                        ->component('Home')
-                        ->where('errors', [])
-                        ->where('keywords.data.0.keyword', $keyword['keyword']);
-                }
+                fn (Assert $page) => $page
+                    ->component('Home')
+                    ->where('errors', [])
+                    ->where('keywords.data.0.keyword', $keyword->keyword)
+
             );
 
-        $this->assertDatabaseHas('keywords', $keyword);
+        $this->assertDatabaseHas('keywords', ['keyword' => $keyword->keyword]);
     }
 }

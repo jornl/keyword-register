@@ -27,9 +27,7 @@ class UpdateKeywordTest extends TestCase
 
         $keyword = Keyword::factory()->create();
 
-        $this
-            ->get(route('dashboard'))
-            ->assertOk();
+        $this->get(route('dashboard'));
 
         $this
             ->followingRedirects()
@@ -52,9 +50,7 @@ class UpdateKeywordTest extends TestCase
 
         $keyword = Keyword::factory()->create();
 
-        $this
-            ->get(route('dashboard'))
-            ->assertOk();
+        $this->get(route('dashboard'));
 
         $this
             ->followingRedirects()
