@@ -10,6 +10,7 @@ import DepartmentsTable from "@/Components/Tables/Departments";
 import KeywordsTable from "@/Components/Tables/Keywords";
 import CreateUpdateDepartment from "@/Components/Modals/CreateUpdateDepartment";
 import CreateUpdateKeyword from "@/Components/Modals/CreateUpdateKeyword";
+import InviteUser from "@/Components/Modals/InviteUser";
 
 export default function Home(props) {
   const [query, setQuery] = useState("");
@@ -33,7 +34,7 @@ export default function Home(props) {
           <StatusCard
             header={
               <h2 className="font-bold text-xl">
-                Nøkkelord/Stikkord ({props.keywords.total})
+                Nøkkelord ({props.keywords.total})
               </h2>
             }
             modal={<CreateUpdateKeyword departments={props.departments.all} />}
@@ -62,7 +63,7 @@ export default function Home(props) {
               <h2 className="font-bold text-xl">Siste registrerte brukere</h2>
             }
             buttonText="Registrer bruker"
-            buttonUrl={route("users.create")}
+            modal={<InviteUser />}
             containerClassName="max-w-lg"
           >
             <UserTable users={props.users} />

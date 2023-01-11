@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\InviteUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Mail;
 
 class UserController extends Controller
 {
@@ -36,7 +38,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attributes = $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users',
+        ]);
+
+        $attributes['password'] = bcrypt('passord');
+
+        $user = User::create($attributes);
+
+        Mail::to($user->email)->send(new InviteUser($user));
     }
 
     /**
