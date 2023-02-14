@@ -3,6 +3,7 @@
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\KeywordController;
 use App\Http\Controllers\MiscController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [KeywordController::class, 'index'])->name("home");
 
 Route::middleware(['auth'])->group(function () {
+
+  Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+  Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
   Route::resource('keywords', KeywordController::class);
   Route::resource('users', UserController::class);
   Route::resource('departments', DepartmentController::class);
