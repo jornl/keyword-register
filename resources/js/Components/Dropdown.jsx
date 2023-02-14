@@ -86,7 +86,7 @@ const Content = ({
   );
 };
 
-const DropdownLink = ({ href, method = "post", as = "a", children }) => {
+const DropdownLink = ({ href, method = "get", as = "a", children }) => {
   return (
     <Link
       href={href}
